@@ -38,7 +38,11 @@ async function database() {
   if (pool) return pool;
   const { MYSQL_HOST, MYSQL_DATABASE, MYSQL_USER, MYSQL_PASSWORD } = process.env;
   if (!MYSQL_HOST || !MYSQL_DATABASE || !MYSQL_USER) throw new Error('Не налаштовані змінні MySQL на Vercel');
-  pool = mysql.createPool({ host:MYSQL_HOST, port:Number(process.env.MYSQL_PORT || 3306), database:MYSQL_DATABASE, user:MYSQL_USER, password:MYSQL_PASSWORD || '', ssl: process.env.MYSQL_SSL === 'true' ? { rejectUnauthorized:true } : undefined, waitForConnections:true, connectionLimit:3, enableKeepAlive:true, charset:'utf8mb4' });
+  const ssl = process.env.MYSQL_SSL === 'true' ? {
+    rejectUnauthorized: process.env.MYSQL_SSL_REJECT_UNAUTHORIZED !== 'false',
+    ...(process.env.MYSQL_CA ? { ca: process.env.MYSQL_CA.replace(/\\n/g, '\n') } : {})
+  } : undefined;
+  pool = mysql.createPool({ host:MYSQL_HOST, port:Number(process.env.MYSQL_PORT || 3306), database:MYSQL_DATABASE, user:MYSQL_USER, password:MYSQL_PASSWORD || '', ssl, waitForConnections:true, connectionLimit:3, enableKeepAlive:true, charset:'utf8mb4' });
   return pool;
 }
 async function ensureSchema() {
