@@ -1,0 +1,4 @@
+.env
+server.js
+database.sql
+DEPLOY_VERCEL.md

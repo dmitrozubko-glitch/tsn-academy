@@ -6,6 +6,7 @@
     "node": "22.x"
   },
   "scripts": {
+    "build": "node -e \"console.log('TSN Academy static build ready')\"",
     "start": "node server.js",
     "dev": "node server.js"
   },

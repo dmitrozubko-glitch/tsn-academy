@@ -25,7 +25,8 @@ function getUser(req) {
   const token = cookies(req).tsn_session;
   if (!token) return null;
   const [payload, signature] = token.split('.');
-  if (!payload || !signature || !crypto.timingSafeEqual(Buffer.from(signature), Buffer.from(sign(payload)))) return null;
+  const expected = sign(payload);
+  if (!payload || !signature || signature.length !== expected.length || !crypto.timingSafeEqual(Buffer.from(signature), Buffer.from(expected))) return null;
   try { const user = JSON.parse(Buffer.from(payload, 'base64url').toString()); return user.exp > Date.now() ? user : null; } catch { return null; }
 }
 function clearSession(res) { res.setHeader('Set-Cookie', 'tsn_session=; HttpOnly; Secure; SameSite=Lax; Path=/; Max-Age=0'); }
