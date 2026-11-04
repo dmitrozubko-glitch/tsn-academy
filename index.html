@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#06111f" />
+  <title>TSN Academy — іспити для команди</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Unbounded:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="noise"></div><div class="orb orb-a"></div><div class="orb orb-b"></div>
+  <main id="app"></main>
+  <template id="login-view">
+    <section class="login-shell reveal">
+      <div class="brand"><span class="brand-mark">T</span><span>TSN<span class="muted">.academy</span></span></div>
+      <div class="login-card glass">
+        <p class="eyebrow">НАВЧАЛЬНИЙ ПОРТАЛ</p><h1>Знання —<br><em>твоя сила.</em></h1>
+        <p class="lead">Іспити ТСН у зручному сучасному просторі.</p>
+        <form id="login-form"><label>Електронна пошта<input required type="email" name="email" placeholder="you@tsn.local"></label><label>Пароль<input required type="password" name="password" placeholder="••••••••"></label><button class="primary" type="submit">Увійти <span>→</span></button></form>
+        <p id="login-error" class="error"></p>
+        <div class="demo-box"><b>Демо-доступ</b><span>Адмін: admin@tsn.local / admin123</span><span>Учасник: user@tsn.local / user123</span></div>
+      </div>
+      <p class="copyright">© 2026 TSN Academy · Внутрішня платформа команди</p>
+    </section>
+  </template>
+  <script src="app.js"></script>
+</body>
+</html>
